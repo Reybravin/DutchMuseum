@@ -1,0 +1,37 @@
+{
+  "configurations" : [
+    {
+      "id" : "A24D9A5E-1F31-48EF-96AA-B17C34E5264E",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:DutchMuseum.xcodeproj",
+      "identifier" : "F64FD8232AB83C320044DF28",
+      "name" : "DutchMuseum"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:DutchMuseum.xcodeproj",
+        "identifier" : "F64FD8392AB83C340044DF28",
+        "name" : "DutchMuseumTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:DutchMuseum.xcodeproj",
+        "identifier" : "F64FD8432AB83C340044DF28",
+        "name" : "DutchMuseumUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

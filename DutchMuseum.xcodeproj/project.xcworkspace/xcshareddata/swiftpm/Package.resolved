@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "kingfisher",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/onevcat/Kingfisher.git",
+      "state" : {
+        "revision" : "b6f62758f21a8c03cd64f4009c037cfa580a256e",
+        "version" : "7.9.1"
+      }
+    },
+    {
+      "identity" : "rijksmuseumapi",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Reybravin/RijksmuseumAPI.git",
+      "state" : {
+        "revision" : "23b7d3e75a94402766c98e38aaa7d8a7c2be8003",
+        "version" : "1.0.0"
+      }
+    }
+  ],
+  "version" : 2
+}
