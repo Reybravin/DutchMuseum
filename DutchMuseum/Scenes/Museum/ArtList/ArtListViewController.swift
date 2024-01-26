@@ -23,6 +23,7 @@ final class ArtListViewController: UIViewController, IAlert {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //title = "Search"
         addCollectionView()
         bind(to: viewModel)
         

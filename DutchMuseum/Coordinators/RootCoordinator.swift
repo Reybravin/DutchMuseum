@@ -21,7 +21,7 @@ final class RootCoordinator: ICoordinator {
         let vc = ArtListViewController()
         vc.viewModel = ArtListViewModel()
         vc.coordinator = self
-        navigationController.pushViewController(vc, animated: false)
+        navigationController.viewControllers = [vc]
     }
     
     func artObjectDetails(model: ArtObject) {

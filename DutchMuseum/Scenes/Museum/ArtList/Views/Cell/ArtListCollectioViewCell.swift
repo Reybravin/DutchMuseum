@@ -66,23 +66,18 @@ final class ArtListCollectioViewCell: UICollectionViewCell {
     private func loadImage(urlString: String) {
         guard let  url = URL(string: urlString) else { return }
         
+        let processor = DownsamplingImageProcessor(size: CGSize(width: self.frame.height,
+                                                                height: self.frame.height))
+        
         imageView.kf.indicatorType = .activity
-        imageView.kf.setImage(with: url) { [weak self] result in
-            guard let self else { return }
-            switch result {
-            case .success(let model):
-                self.setLoadedImage(model.image)
-            case .failure:
-                self.setLoadedImage(nil)
-            }
-        }
-    }
-    
-    private func setLoadedImage(_ image: UIImage?) {
-        DispatchQueue.main.async {
-            self.imageView.kf.indicatorType = .none
-            self.imageView.image = image
-        }
+        
+        imageView.kf.setImage(with: url,
+                              options: [
+                                .processor(processor),
+                                .scaleFactor(UIScreen.main.scale),
+                                //.cacheSerializer(FormatIndicatedCacheSerializer.png),
+                                .cacheOriginalImage
+                              ])
     }
     
     // MARK: - Public methods

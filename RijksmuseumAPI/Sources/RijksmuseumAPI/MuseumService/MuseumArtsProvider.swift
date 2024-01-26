@@ -51,6 +51,7 @@ internal struct MuseumArtsProvider: ApiEndpoint {
             queryItems.append(URLQueryItem(name: "involvedMaker", value: maker))
             queryItems.append(URLQueryItem(name: "p", value: String(page)))
             queryItems.append(URLQueryItem(name: "ps", value: String(numberOfResultsPerPage)))
+            queryItems.append(URLQueryItem(name: "imgonly", value: String(true)))
             return queryItems
         case .artByQuery(let query, let page, let numberOfResultsPerPage):
             var queryItems: [URLQueryItem] = []
@@ -58,6 +59,7 @@ internal struct MuseumArtsProvider: ApiEndpoint {
             queryItems.append(URLQueryItem(name: "q", value: query))
             queryItems.append(URLQueryItem(name: "p", value: String(page)))
             queryItems.append(URLQueryItem(name: "ps", value: String(numberOfResultsPerPage)))
+            queryItems.append(URLQueryItem(name: "imgonly", value: String(true)))
             return queryItems
         }
     }

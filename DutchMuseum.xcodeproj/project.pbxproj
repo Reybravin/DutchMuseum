@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,7 +16,8 @@
 		F64FD8492AB83C340044DF28 /* DutchMuseumUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64FD8482AB83C340044DF28 /* DutchMuseumUITests.swift */; };
 		F64FD84B2AB83C340044DF28 /* DutchMuseumUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64FD84A2AB83C340044DF28 /* DutchMuseumUITestsLaunchTests.swift */; };
 		F64FD85A2AB854B10044DF28 /* ArtListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64FD8592AB854B10044DF28 /* ArtListViewModel.swift */; };
-		F664515D2AC0690A0079EC94 /* RijksmuseumAPI in Frameworks */ = {isa = PBXBuildFile; productRef = F664515C2AC0690A0079EC94 /* RijksmuseumAPI */; };
+		F6AF98D22B6283DA005210AD /* RijksmuseumAPI in Frameworks */ = {isa = PBXBuildFile; productRef = F6AF98D12B6283DA005210AD /* RijksmuseumAPI */; };
+		F6AF98D52B628510005210AD /* RijksmuseumAPI in Frameworks */ = {isa = PBXBuildFile; productRef = F6AF98D42B628510005210AD /* RijksmuseumAPI */; };
 		F6B84DB42AB9D9F700042A1E /* ArtObjectDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B84DB32AB9D9F700042A1E /* ArtObjectDetailViewController.swift */; };
 		F6B84DB62AB9DEDA00042A1E /* ArtListCollectioViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B84DB52AB9DEDA00042A1E /* ArtListCollectioViewCell.swift */; };
 		F6B84DC12AB9EEA800042A1E /* ArtListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B84DC02AB9EEA800042A1E /* ArtListHeaderView.swift */; };
@@ -91,8 +92,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6AF98D52B628510005210AD /* RijksmuseumAPI in Frameworks */,
 				F6B84DD32ABB17FF00042A1E /* Kingfisher in Frameworks */,
-				F664515D2AC0690A0079EC94 /* RijksmuseumAPI in Frameworks */,
+				F6AF98D22B6283DA005210AD /* RijksmuseumAPI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,9 +286,9 @@
 		F6D93CB62ABDE4E7001F28DE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F6D93CAE2ABDBC04001F28DE /* ArtListCollectionView */,
 				F6B84DBC2AB9EBFF00042A1E /* Cell */,
 				F6B84DBF2AB9EE9F00042A1E /* Header */,
-				F6D93CAE2ABDBC04001F28DE /* ArtListCollectionView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -352,7 +354,8 @@
 			name = DutchMuseum;
 			packageProductDependencies = (
 				F6B84DD22ABB17FF00042A1E /* Kingfisher */,
-				F664515C2AC0690A0079EC94 /* RijksmuseumAPI */,
+				F6AF98D12B6283DA005210AD /* RijksmuseumAPI */,
+				F6AF98D42B628510005210AD /* RijksmuseumAPI */,
 			);
 			productName = DutchMuseum;
 			productReference = F64FD8242AB83C320044DF28 /* DutchMuseum.app */;
@@ -428,7 +431,7 @@
 			mainGroup = F64FD81B2AB83C320044DF28;
 			packageReferences = (
 				F6B84DD12ABB17FF00042A1E /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				F664515B2AC0690A0079EC94 /* XCRemoteSwiftPackageReference "RijksmuseumAPI" */,
+				F6AF98D32B628510005210AD /* XCLocalSwiftPackageReference "RijksmuseumAPI" */,
 			);
 			productRefGroup = F64FD8252AB83C320044DF28 /* Products */;
 			projectDirPath = "";
@@ -824,15 +827,14 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		F664515B2AC0690A0079EC94 /* XCRemoteSwiftPackageReference "RijksmuseumAPI" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Reybravin/RijksmuseumAPI.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
+/* Begin XCLocalSwiftPackageReference section */
+		F6AF98D32B628510005210AD /* XCLocalSwiftPackageReference "RijksmuseumAPI" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = RijksmuseumAPI;
 		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCRemoteSwiftPackageReference section */
 		F6B84DD12ABB17FF00042A1E /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
@@ -844,9 +846,12 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		F664515C2AC0690A0079EC94 /* RijksmuseumAPI */ = {
+		F6AF98D12B6283DA005210AD /* RijksmuseumAPI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = F664515B2AC0690A0079EC94 /* XCRemoteSwiftPackageReference "RijksmuseumAPI" */;
+			productName = RijksmuseumAPI;
+		};
+		F6AF98D42B628510005210AD /* RijksmuseumAPI */ = {
+			isa = XCSwiftPackageProductDependency;
 			productName = RijksmuseumAPI;
 		};
 		F6B84DD22ABB17FF00042A1E /* Kingfisher */ = {

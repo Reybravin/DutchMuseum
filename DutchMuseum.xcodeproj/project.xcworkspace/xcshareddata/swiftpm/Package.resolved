@@ -8,15 +8,6 @@
         "revision" : "b6f62758f21a8c03cd64f4009c037cfa580a256e",
         "version" : "7.9.1"
       }
-    },
-    {
-      "identity" : "rijksmuseumapi",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Reybravin/RijksmuseumAPI.git",
-      "state" : {
-        "revision" : "3404a646ace2ef9de6527388ffea22d9f7d449dc",
-        "version" : "1.0.2"
-      }
     }
   ],
   "version" : 2
