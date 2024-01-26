@@ -9,4 +9,5 @@ import Foundation
 
 protocol ArtListCollectionViewDelegate: AnyObject {
     func didSelectItem(at indexPath: IndexPath)
+    func didReachBottom()
 }

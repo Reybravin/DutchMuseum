@@ -140,6 +140,13 @@ extension ArtListCollectionView: UICollectionViewDataSource {
         
 extension ArtListCollectionView: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.section == collectionView.numberOfSections - 1 &&
+            indexPath.row == collectionView.numberOfItems(inSection: indexPath.section) - 1 {
+            delegate?.didReachBottom()
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
         delegate?.didSelectItem(at: indexPath)

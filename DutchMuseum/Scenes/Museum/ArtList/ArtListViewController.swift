@@ -140,4 +140,8 @@ extension ArtListViewController: ArtListCollectionViewDelegate {
     func didSelectItem(at indexPath: IndexPath) {
         viewModel?.didSelectItem(at: indexPath)
     }
+    
+    func didReachBottom() {
+        viewModel?.didReachBottom()
+    }
 }

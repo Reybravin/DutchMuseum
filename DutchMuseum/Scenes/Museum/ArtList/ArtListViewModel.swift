@@ -15,7 +15,7 @@ enum MuseumRoute {
 protocol IArtListViewModelInput {
     func didEnterSearchQuery(_ query: String)
     func didSelectItem(at indexPath: IndexPath)
-    func didSelectPage(_ page: Int)
+    func didReachBottom()
 }
 
 protocol IArtListViewModelOutput {
@@ -39,22 +39,27 @@ final class ArtListViewModel: IArtListViewModel, API {
     
     private var fetchedData: ArtObjectList?
     private var searchQuery: String?
-    private var page: Int = 1
+    private var page: Int = 0
+    private let numberOfResultsPerPage = 10
+    private var numberOfAvailablePages: Int {
+        (fetchedData?.count ?? 0) / numberOfResultsPerPage
+    }
+
+    private var isLoadingMore = false
     
     // MARK: - Public methods
     
     func didEnterSearchQuery(_ query: String) {
-        guard self.searchQuery != query else { return }
+        guard searchQuery != query else { return }
         
-        self.searchQuery = query
-        getNewData(searchQuery: query, page: self.page)
-    }
-
-    func didSelectPage(_ page: Int) {
-        guard let searchQuery,
-              self.page != page else { return }
+        searchQuery = query
+        resetData()
         
-        getNewData(searchQuery: searchQuery, page: page)
+        Task {
+            let data = await loadData(searchQuery: query, page: self.page)
+            fetchedData = data
+            collectionViewData.send((models: [data?.artObjects ?? [] ], headers: [query]))
+        }
     }
     
     func didSelectItem(at indexPath: IndexPath) {
@@ -64,21 +69,44 @@ final class ArtListViewModel: IArtListViewModel, API {
         let model = models[indexPath.row]
         route.send(.details(model))
     }
-
-    private func getNewData(searchQuery: String, page: Int) {
+    
+    func didReachBottom() {
+        guard (fetchedData?.count ?? 0) / numberOfResultsPerPage - 1 > page,
+                !isLoadingMore,
+                let searchQuery else { return }
         Task {
-            do {
-                let data = try await api.museum.fetchMakerArt(searchQuery: searchQuery, page: page)
-                fetchedData = data
-                self.collectionViewData.send((models: [data.artObjects ?? [] ], headers: [searchQuery]))
-            } catch {
-                if let err = error as? AppError {
-                    self.error.send((title: err.title, message: err.message))
-                } else {
-                    self.error.send((title: "Error", message: error.localizedDescription))
-                }
+            isLoadingMore = true
+            page += 1
+            let data = await loadData(searchQuery: searchQuery, page: page)
+            if let newObjects = data?.artObjects {
+                fetchedData?.artObjects?.append(contentsOf: newObjects)
+                collectionViewData.send((models: [fetchedData?.artObjects ?? [] ], headers: [searchQuery]))
             }
+            isLoadingMore = false
         }
+    }
+    
+    // MARK: Private methods
+
+    private func loadData(searchQuery: String, page: Int) async -> ArtObjectList? {
+        do {
+            let data = try await api.museum.fetchMakerArt(maker: searchQuery, page: page, numberOfResultsPerPage: numberOfResultsPerPage)
+//            let data = try await api.museum.fetchArt(searchQuery: searchQuery, page: page, numberOfResultsPerPage: numberOfResultsPerPage)
+            return data
+        } catch {
+            if let err = error as? AppError {
+                self.error.send((title: err.title, message: err.message))
+            } else {
+                self.error.send((title: "Error", message: error.localizedDescription))
+            }
+            return nil
+        }
+    }
+    
+    private func resetData() {
+        fetchedData = nil
+        page = 0
+        isLoadingMore = false
     }
 
 }
