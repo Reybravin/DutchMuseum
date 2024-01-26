@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Reybravin/RijksmuseumAPI.git",
       "state" : {
-        "revision" : "23b7d3e75a94402766c98e38aaa7d8a7c2be8003",
-        "version" : "1.0.0"
+        "revision" : "3404a646ace2ef9de6527388ffea22d9f7d449dc",
+        "version" : "1.0.2"
       }
     }
   ],
