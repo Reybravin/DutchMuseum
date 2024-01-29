@@ -25,8 +25,8 @@ final class ArtListCollectioViewCell: UICollectionViewCell {
     
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
-        label.textColor = UIColor.darkGray
+        label.font = UIFont.systemFont(ofSize: 18)
+        label.textColor = UIColor.label
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

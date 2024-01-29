@@ -26,9 +26,7 @@ final class ArtObjectDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = .white
-        
+        view.backgroundColor = UIColor.systemBackground
         setupViews()
     }
     
@@ -44,12 +42,14 @@ final class ArtObjectDetailViewController: UIViewController {
         imageView.clipsToBounds = true
         
         let titleLabel = UILabel()
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 14)
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        titleLabel.textColor = UIColor.label
         titleLabel.numberOfLines = 0
         titleLabel.textAlignment = .left
         
         let subTitleLabel = UILabel()
-        subTitleLabel.font = UIFont.systemFont(ofSize: 12)
+        subTitleLabel.font = UIFont.systemFont(ofSize: 14)
+        subTitleLabel.textColor = UIColor.systemGray
         subTitleLabel.numberOfLines = 0
         subTitleLabel.textAlignment = .left
         

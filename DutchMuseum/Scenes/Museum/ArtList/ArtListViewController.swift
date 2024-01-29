@@ -23,32 +23,32 @@ final class ArtListViewController: UIViewController, IAlert {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //title = "Search"
+        addSearchBar()
         addCollectionView()
         bind(to: viewModel)
-        
-        
-        searchController.searchResultsUpdater = self
-        searchController.delegate = self
-        searchController.searchBar.delegate = self
-        searchController.hidesNavigationBarDuringPresentation = false
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search..."
-        searchController.searchBar.sizeToFit()
-        searchController.searchBar.becomeFirstResponder()
-        navigationItem.titleView = searchController.searchBar
-
-        definesPresentationContext = true
-        searchController.searchBar.placeholder = "Search for Items"
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        viewModel?.didEnterSearchQuery("Rembrandt van Rijn")
+        searchController.isActive = true
+        searchController.searchBar.text = "Rembrandt van Rijn"
     }
     
     // MARK: - Private methods
+    
+    private func addSearchBar() {
+        searchController.searchResultsUpdater = self
+        searchController.delegate = self
+        searchController.searchBar.delegate = self
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Enter artist's name..."
+        searchController.searchBar.sizeToFit()
+        searchController.searchBar.becomeFirstResponder()
+        navigationItem.titleView = searchController.searchBar
+        definesPresentationContext = true
+    }
     
     private func addCollectionView() {
         let collectionView = ArtListCollectionView(frame: view.frame)
@@ -83,43 +83,14 @@ final class ArtListViewController: UIViewController, IAlert {
 }
 
 extension ArtListViewController: UISearchControllerDelegate, UISearchBarDelegate, UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        onSearchTextChange(searchController.searchBar)
+    }
+    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        //searchActive = false
         self.dismiss(animated: true, completion: nil)
     }
-    
-    func updateSearchResults(for searchController: UISearchController)
-    {
-        let searchString = searchController.searchBar.text
-        
-//        filtered = items.filter({ (item) -> Bool in
-//            let countryText: NSString = item as NSString
-//            
-//            return (countryText.range(of: searchString!, options: NSString.CompareOptions.caseInsensitive).location) != NSNotFound
-//        })
-//        
-//        collectionView.reloadData()
-    }
-    
-//    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-//        searchActive = true
-//        collectionView.reloadData()
-//    }
-    
-//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        searchActive = false
-//        collectionView.reloadData()
-//    }
-    
-//    func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
-//        if !searchActive {
-//            searchActive = true
-//            collectionView.reloadData()
-//        }
-//        
-//        searchController.searchBar.resignFirstResponder()
-//    }
-    
+
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(onSearchTextChange), object: searchBar)
         perform(#selector(onSearchTextChange), with: searchBar, afterDelay: 0.5)
@@ -127,11 +98,9 @@ extension ArtListViewController: UISearchControllerDelegate, UISearchBarDelegate
     
     @objc private func onSearchTextChange(_ searchBar: UISearchBar) {
         guard let query = searchBar.text, query.trimmingCharacters(in: .whitespaces) != "" else {
-            print("nothing to search")
             return
         }
         viewModel?.didEnterSearchQuery(query)
-        print(query)
     }
 }
 

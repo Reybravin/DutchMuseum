@@ -53,7 +53,6 @@ final class ArtListCollectionView: UIView {
         // Cell
         collectionView.register(cell,
                                 forCellWithReuseIdentifier: String(describing: cell))
-        collectionView.backgroundColor = UIColor.white
         
         // Header
         let headerView = ArtListHeaderView.self

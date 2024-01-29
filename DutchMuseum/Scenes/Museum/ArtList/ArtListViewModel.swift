@@ -91,7 +91,6 @@ final class ArtListViewModel: IArtListViewModel, API {
     private func loadData(searchQuery: String, page: Int) async -> ArtObjectList? {
         do {
             let data = try await api.museum.fetchMakerArt(maker: searchQuery, page: page, numberOfResultsPerPage: numberOfResultsPerPage)
-//            let data = try await api.museum.fetchArt(searchQuery: searchQuery, page: page, numberOfResultsPerPage: numberOfResultsPerPage)
             return data
         } catch {
             if let err = error as? AppError {
@@ -108,5 +107,4 @@ final class ArtListViewModel: IArtListViewModel, API {
         page = 0
         isLoadingMore = false
     }
-
 }
